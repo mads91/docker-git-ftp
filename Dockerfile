@@ -16,7 +16,7 @@ RUN apt-get -qq update && apt-get -qq install git && apt-get -qq install wget
 RUN apt-get -qq install build-essential nghttp2 libnghttp2-dev
 RUN wget https://curl.haxx.se/download/curl-7.54.0.tar.bz2
 RUN tar -xvjf curl-7.54.0.tar.bz2
-RUN cd curl-7.54.0 && ./configure --with-nghttp2 --prefix=/usr/local && make && make install
+RUN cd curl-7.54.0 && ./configure --with-nghttp2 --disable-shared --prefix=/usr/local && make && make install
 RUN ldconfig
 
 
