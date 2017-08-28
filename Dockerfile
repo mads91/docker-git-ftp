@@ -5,13 +5,26 @@ MAINTAINER Mads Hansen <mh@baernholdt.com>
 RUN apt-get -qq update && apt-get -qq install git
 
 # Rebuild curl with sftp support
-RUN apt-get install -y build-essential debhelper libssh2-1-dev
-RUN apt-get source curl
-RUN apt-get build-dep -y curl
-RUN cd curl-*
-RUN DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage
-RUN cd ..
-RUN dpkg -i curl*.deb libcurl3-nss*.deb libcurl4-doc*.deb libcurl4-openssl*.deb libcurl3_*.deb
+#RUN apt-get install -y build-essential debhelper libssh2-1-dev
+#RUN apt-get source curl
+#RUN apt-get build-dep -y curl
+#RUN cd curl-*
+#RUN DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage
+#RUN cd ..
+#RUN dpkg -i curl*.deb libcurl3-nss*.deb libcurl4-doc*.deb libcurl4-openssl*.deb libcurl3_*.deb
+
+RUN sudo apt-get install build-essential nghttp2 libnghttp2-dev
+RUN wget https://curl.haxx.se/download/curl-7.54.0.tar.bz2
+RUN tar -xvjf curl-7.54.0.tar.bz2
+RUN cd curl-7.54.0
+RUN ./configure --with-nghttp2 --prefix=/usr/local
+RUN make
+RUN sudo make install
+RUN sudo ldconfig
+
+
+
+
 
 # Use "drench" version which support `git ftp fetch`
 RUN cd /usr/local/src
