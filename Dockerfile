@@ -11,4 +11,3 @@ RUN cd libssh2-1.8.0 && ./configure && make && make install
 RUN wget https://curl.haxx.se/download/curl-7.54.0.tar.bz2
 RUN tar -xvjf curl-7.54.0.tar.bz2
 RUN cd curl-7.54.0 && ./configure --with-libssh2=/usr/local && make && make install
-RUN ldconfig
