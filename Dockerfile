@@ -1,8 +1,12 @@
 FROM ubuntu:16.04
 MAINTAINER Mads Hansen <mh@baernholdt.com>
 
+
 # install git and other deps
-RUN apt-get -qq update && apt-get -qq install git wget libssl-dev build-essential git-ftp
+RUN apt-get -qq update && apt-get -qq install git wget libssl-dev build-essential software-properties-common
+
+# add the newest git-ftp PPA and update the installation
+RUN add-apt-repository ppa:git-ftp/ppa && apt-get update && apt-get -qq install git-ftp
 
 # get and build libssh2 and curl
 RUN wget https://www.libssh2.org/download/libssh2-1.8.0.tar.gz
